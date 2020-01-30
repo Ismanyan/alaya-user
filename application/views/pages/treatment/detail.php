@@ -29,6 +29,9 @@
         <div class="data mt-3">
             <h4 class="treatment-detail"></h4>
             <p class="treatment-desc"></p>
+            <hr>
+            <p><b>Duration : </b> <span class="times"></span></p>
+            <p><b>Price : </b> <span class="prices"></span></p>
         </div>
     </div>
 
@@ -44,9 +47,18 @@
             success: function(response) {
                 $('.loader').hide();
                 let x = JSON.parse(response);
+                console.log(x);
                 if (x.length == 0) {
                     $('.alert').show();
                 } else {
+                    if (x.length == 1) {
+                        $('.times').append(x[0].treatment_duration + ' Minute');
+                        $('.prices').append('Rp.' + x[0].treatment_price);
+                    } else {
+                        $('.times').append(x[0].treatment_duration + ' Minute - ' + x[1].treatment_duration + ' Minute');
+                        $('.prices').append('Rp.' + x[0].treatment_price + ' - Rp.' + x[1].treatment_price);
+                    }
+
                     $('.treatment-image').attr('src', assets_url + 'img/slide/slide3.jpg');
                     $('.treatment-detail').append(x[0].treatment_name);
                     $('.treatment-desc').append(x[0].treatment_desc);

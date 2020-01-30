@@ -8,3 +8,5 @@
 <input type="hidden" class="lat_branch" value="<?= $this->session->branch_latitude_user ?>">
 <input type="hidden" class="long_branch" value="<?= $this->session->branch_longitude_user ?>">
 <input type="hidden" class="time_now" value="<?= date('H:i') ?>">
+<input type="hidden" class="open_hour" value="<?= $this->session->open_hour ?>">
+<input type="hidden" class="closing_time" value="<?= $this->session->closing_time ?>">

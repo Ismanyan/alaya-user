@@ -75,7 +75,7 @@
                                 <a class="text-decoration-none" href="` + base_url + 'absent/history/detail/' + value.id + `">
                                     <div class="row my-4 border-bottom animated fadeIn slow">
                                         <div class="col-5">
-                                            <img class="treatment-img w-100" src="` + assets_url + 'img/slide/slide3.jpg' + `" style="#">
+                                            <img class="treatment-img w-100 mb-2" width="100" height="110" src="` + assets_url + 'img/default.jpg' + `" style="#">
                                         </div>
                                         <div class="col-7">
                                             <h5 class="head-title text-truncate">` + value.fullname + `</h5>
@@ -93,7 +93,7 @@
                 }
             });
         }
-        
+
         first(null);
 
         $('.float').click(function() {

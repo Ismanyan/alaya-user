@@ -88,6 +88,7 @@
                     success: function(response) {
                         let responses = JSON.parse(response);
                         // console.log(response);
+                        // console.log(response);
                         if (responses.code == 200) {
                             $('.splashscreen').hide();
                             document.location.href = base_url + 'pin';

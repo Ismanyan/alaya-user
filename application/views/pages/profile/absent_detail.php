@@ -32,16 +32,16 @@
                         <td class="ml-1 user_id"> : </td>
                     </tr>
                     <tr>
-                        <td><b>Cordinate</b></td>
-                        <td class="ml-1 cordinate"> : </td>
-                    </tr>
-                    <tr>
                         <td><b>Waktu Masuk</b></td>
                         <td class="ml-1 entry_time"> : </td>
                     </tr>
                     <tr>
                         <td><b>Tanggal Masuk</b></td>
                         <td class="ml-1 absent_date"> : </td>
+                    </tr>
+                    <tr>
+                        <td><b>Cordinate</b></td>
+                        <td class="ml-1 cordinate"> : <a href="#" target="_blank" class="btn btn-secondary maps">View on Maps</a> </td>
                     </tr>
                 </table>
             </div>
@@ -62,16 +62,16 @@
                 var x = JSON.parse(response);
                 console.log(x);
                 $('.loader').hide();
-                $('.treatment-image').attr('src', assets_url + 'img/slide/slide3.jpg');
+                $('.treatment-image').attr('src', assets_url + 'img/default.jpg');
                 $('.absent-detail').append(x[0].fullname);
                 $('.user_id').append(x[0].user_id);
-                $('.cordinate').append(x[0].address);
                 $('.entry_time').append(x[0].absent_time);
                 $('.absent_date').append(x[0].absent_date);
+                $('.maps').attr('href', 'https://maps.google.com/?q=' + x[0].latitude + ',' + x[0].longitude);
                 $('.data').show();
-                $('.cordinate').ellipsis({
-                    row: 1
-                });
+                // $('.cordinate').ellipsis({
+                //     row: 1
+                // });
             }
         });
     </script>

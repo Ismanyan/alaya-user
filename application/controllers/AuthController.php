@@ -41,15 +41,17 @@ class AuthController extends CI_Controller
         
         if ($response['code'] == 200 && $response['body']->result->position_id == 1) {
             $sessionData = array(
-                'id_user'       => $response['body']->result->id_user,
-                'password_user' => true,
-                'role_user'     => 1,
-                'branch_id_user'=> $response['body']->result->branch_id,
+                'id_user'               => $response['body']->result->id_user,
+                'password_user'         => true,
+                'role_user'             => 1,
+                'branch_id_user'        => $response['body']->result->branch_id,
                 'branch_latitude_user'  => $response['body']->result->latitude,
                 'branch_longitude_user' => $response['body']->result->longitude,
-                'fullname_user' => $response['body']->result->fullname,
-                'pin_user' => $response['body']->result->pin,
-                'token_user'    => $response['body']->result->api_token
+                'fullname_user'         => $response['body']->result->fullname,
+                'pin_user'              => $response['body']->result->pin,
+                'token_user'            => $response['body']->result->api_token,
+                'open_hour'             => $response['body']->result->open_hour,
+                'closing_time'          => $response['body']->result->closing_time
             );
 
             $this->session->set_userdata($sessionData);

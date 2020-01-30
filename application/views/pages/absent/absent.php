@@ -15,6 +15,9 @@
             <img src="<?= asset_url() . 'img/icons/back.png' ?>" alt="back" width="12">
         </a>
         <a class="navbar-brand mx-auto text-white" href="#" disabled>Absent</a>
+        <a class="text-white help" href="#">
+            Help
+        </a>
     </nav>
 
     <div id="splashscreen" class="splashscreen">
@@ -35,6 +38,7 @@
     <div id="map">
         <div class="map-overlay"></div>
         <div class="map-container"></div>
+
 
         <button type="button" class="btn btn-primary area py-3 animated fadeInUp slow btn-absent absent">Cek Absen</button>
     </div>
@@ -101,7 +105,7 @@
                 var isInside = d < this.circle.getRadius();
                 if (isInside == true) {
                     $('.btn-absent').click(function() {
-                        addAbsent();
+                        addAbsent(1);
                     });
                 } else {
                     $('.btn-absent').click(function() {
@@ -173,7 +177,22 @@
             map.centerOnLocation("<?= $this->session->lat_user  ?>", "<?= $this->session->long_user  ?>");
         });
 
-        function addAbsent() {
+        $('.help').click(function() {
+            Swal.fire({
+                title: "Abent Manual",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Absent Manual',
+                text: "Jika kordinat anda bermasalah anda bisa melakukan absent manual",
+                footer: '<a href>Hubungi Admin</a>'
+            }).then((result) => {
+                if (result.value) {
+                    addAbsent(0);
+                }
+            })
+        });
+
+        function addAbsent(x) {
             $('#map').hide();
             $('.splashscreen').show();
 
@@ -181,6 +200,9 @@
             var id_user = $('.id_user').val();
             var branch_id = $('.branch_id').val();
             var time_now = $('.time_now').val();
+            var lat_user = $('.lat_user').val();
+            var long_user = $('.long_user').val();
+            var status = x;
 
             $.ajax({
                 url: base_url + 'absent/add',
@@ -189,7 +211,10 @@
                     user_id: id_user,
                     position_id: 1,
                     branch_id: branch_id,
-                    absent_time: time_now
+                    absent_time: time_now,
+                    latitude: lat_user,
+                    longitude: long_user,
+                    absent_status: status
                 },
                 success: function(response) {
                     let x = JSON.parse(response);
@@ -199,7 +224,7 @@
                             Swal.fire({
                                 title: "Absent Sukses",
                                 icon: 'success',
-                                text: "Terimakasih telah absent hari ini",
+                                text: "Terima kasih telah absent hari ini",
                                 timer: 2000,
                                 onClose: () => {
                                     window.location.replace(base_url);
@@ -217,11 +242,13 @@
                             });
                         }
                     } else {
+                        console.log(x);
                         Swal.fire({
                             title: "Absent Gagal",
                             icon: 'warning',
                             text: "Terjadi error harap lapor admin",
-                            timer: 4000,
+                            // timer: 4000,
+                            footer: '<a href="tel:+">Hubungi Admin</a>',
                             onClose: () => {
                                 window.location.replace(base_url);
                             }
